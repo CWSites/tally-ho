@@ -38,7 +38,9 @@ export const Balances = ({ ownerAddress }: BalanceProps) => {
 
   return (
     <>
-      <button onClick={fetchBalances}>Fetch Balances</button>
+      {ownerAddress !== "" && (
+        <button onClick={fetchBalances}>Fetch Balances</button>
+      )}
       <BalanceTable data={balances} />
     </>
   );

@@ -1,10 +1,10 @@
+import icon from "./icon.svg";
+
 interface TableProps {
   data: any[];
 }
 
 export const BalanceTable = ({ data }: TableProps) => {
-  console.log(data);
-
   return (
     <table>
       <thead>
@@ -17,13 +17,28 @@ export const BalanceTable = ({ data }: TableProps) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>...</td>
-          <td>...</td>
-          <td>...</td>
-          <td>...</td>
-          <td>...</td>
-        </tr>
+        {data.length > 0 ? (
+          data.map((row: any, index) => (
+            <tr key={index}>
+              <td className="center">
+                <img src={icon} alt="" />
+              </td>
+              <td className="right">{row.tokenBalance}</td>
+              <td>TAL</td>
+              <td>Tally Token</td>
+              <td>{row.contractAddress}</td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan={5}>
+              <span className="empty-msg">
+                No balances found. Please make sure you are signed in to your
+                wallet.
+              </span>
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

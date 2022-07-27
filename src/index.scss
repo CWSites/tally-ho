@@ -1,0 +1,89 @@
+$layerOne: rgb(253 246 237);
+$layerTwo: rgb(251 237 218);
+$layerThree: rgb(236, 210, 176);
+$layerFour: rgb(181 112 23);
+
+body {
+  background: $layerOne;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin: 0;
+  padding: 50px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  background: $layerTwo;
+  padding: 0.2em 0.4em;
+  margin: 0.2em 0;
+}
+
+dl {
+  dt {
+    font-weight: bold;
+  }
+  dd {
+    margin: 0.5em 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+button {
+  background: $layerFour;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  max-width: 100%;
+  width: 100%;
+
+  img {
+    max-width: 32px;
+    margin: 0 auto;
+  }
+
+  thead {
+    background: $layerThree;
+  }
+
+  tbody {
+    background: $layerTwo;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .empty-msg {
+    text-align: center;
+    display: block;
+    margin: 1.5rem 0;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}

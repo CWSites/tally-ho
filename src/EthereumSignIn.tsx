@@ -15,6 +15,8 @@ export const WalletConnect = () => {
     provider
       .send("eth_requestAccounts", [])
       .catch(() => console.log("user rejected request"));
+
+    console.log(provider);
   };
 
   return (
@@ -58,26 +60,32 @@ export const EthereumSignIn = ({ onSignIn }: EthereumSignInProps) => {
   };
 
   return (
-    <div>
+    <>
       {!signerAddress && (
         <button id="siweBtn" onClick={signInWithEthereum}>
           Ethereum Sign In
         </button>
       )}
-      {signerAddress && (
-        <p>
-          Signed in to wallet{" "}
-          <a
-            href={`https://etherscan.io/address/${ethAddress}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <code>{ethAddress}</code>
-          </a>
-          , verification <code>{signerAddress}</code>
-        </p>
-      )}
-      <button>Sign message</button>
-    </div>
+      <div>
+        {signerAddress && (
+          <dl>
+            <dt>Owner Address</dt>
+            <dd>
+              <a
+                href={`https://etherscan.io/address/${ethAddress}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <code>{ethAddress}</code>
+              </a>
+            </dd>
+            <dt>Signer Address</dt>
+            <dd>
+              <code className="ellipsis">{signerAddress}</code>
+            </dd>
+          </dl>
+        )}
+      </div>
+    </>
   );
 };
