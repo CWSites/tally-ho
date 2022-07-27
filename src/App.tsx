@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { EthereumSignIn, WalletConnect } from "./EthereumSignIn";
+import { Balances } from "./BalanceTable";
 
-function App() {
+export const Header = () => {
+  return (
+    <header>
+      <img src={logo} alt="Tally Ho" />
+    </header>
+  );
+};
+
+export const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <WalletConnect />
+      <EthereumSignIn />
+      <Balances />
     </div>
   );
-}
-
-export default App;
+};
