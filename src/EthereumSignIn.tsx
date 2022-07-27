@@ -1,11 +1,14 @@
+import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { SiweMessage } from "siwe";
 
-const domain = window.location.host;
-const origin = window.location.origin;
 // @ts-ignore - https://github.com/Microsoft/TypeScript/issues/1574
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
+
+interface EthereumSignInProps {
+  onSignIn: (address: string) => void;
+}
 
 export const WalletConnect = () => {
   const connectWallet = () => {
@@ -21,7 +24,17 @@ export const WalletConnect = () => {
   );
 };
 
-export const EthereumSignIn = () => {
+export const EthereumSignIn = ({ onSignIn }: EthereumSignInProps) => {
+  const [signerAddress, setSignerAddress] = useState("");
+  const [ethAddress, setEthAddress] = useState("");
+
+  const domain = window.location.host;
+  const origin = window.location.origin;
+
+  useEffect(() => {
+    localStorage.setItem("signerAddress", signerAddress);
+  }, [signerAddress]);
+
   const createSiweMessage = (address: string, statement: string) => {
     const message = new SiweMessage({
       domain,
@@ -31,6 +44,8 @@ export const EthereumSignIn = () => {
       version: "1",
       chainId: 1,
     });
+    setEthAddress(address);
+    onSignIn(address);
     return message.prepareMessage();
   };
 
@@ -39,16 +54,30 @@ export const EthereumSignIn = () => {
       await signer.getAddress(),
       "Sign in with Ethereum to the app."
     );
-    console.log(await signer.signMessage(message));
+    setSignerAddress(await signer.signMessage(message));
   };
 
   return (
-    <>
-      <button id="siweBtn" onClick={signInWithEthereum}>
-        Ethereum Sign In
-      </button>
-      <p>Sign in message here...</p>
+    <div>
+      {!signerAddress && (
+        <button id="siweBtn" onClick={signInWithEthereum}>
+          Ethereum Sign In
+        </button>
+      )}
+      {signerAddress && (
+        <p>
+          Signed in to wallet{" "}
+          <a
+            href={`https://etherscan.io/address/${ethAddress}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <code>{ethAddress}</code>
+          </a>
+          , verification <code>{signerAddress}</code>
+        </p>
+      )}
       <button>Sign message</button>
-    </>
+    </div>
   );
 };
