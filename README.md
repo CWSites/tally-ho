@@ -74,3 +74,7 @@ These questions are close to our daily work. Give them some thought and let's ch
   ## Feedback
 
   How could we improve this test?
+
+  - It would be nice if there was a demo wallet which could be used to display tokens & balances. This wouldn't need to be a wallet that I had access to, just a good sample for the Alchemy API to fetch balances from.
+  - It wasn't clear to me what the arbitrary text was to be used for, so I saved it to local state and localStorage, then displayed it on the UI.
+  - A few parts on the mockup were confusing, for instance the "sign message" looks like a button but after clarifying with Alice I think it was just a description of what was supposed to show in that area.
